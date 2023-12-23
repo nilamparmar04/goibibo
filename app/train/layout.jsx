@@ -1,3 +1,4 @@
+import Navbar from "../components/Navbar";
 
 
 
@@ -6,7 +7,10 @@ export default function TrainLayout({
   }) {
     return (
       <html lang="en">
-        <body>{children}</body>
+        <body>
+          {/* <Navbar/> */}
+          {children}
+        </body>
       </html>
     )
 }

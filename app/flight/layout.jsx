@@ -1,4 +1,5 @@
 import React from "react"
+import Navbar from "../components/Navbar"
 
 export default function FlightLayout({
     children,
@@ -6,7 +7,10 @@ export default function FlightLayout({
 
     return (
       <html lang="en">
-        <body>{children}</body>
+        <body>
+          {/* <Navbar/> */}
+          {children}
+        </body>
       </html>
     )
 
