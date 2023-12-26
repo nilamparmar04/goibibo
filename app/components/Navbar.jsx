@@ -1,13 +1,35 @@
 'use client'
-import React from 'react'
-import { AppBar, Box, Button, Chip, Container, Grid, Stack, Tooltip, Typography } from '@mui/material'
+import React, { useState } from 'react'
+import { AppBar, Box, Button, Chip, Container, Grid, Modal, Paper, Stack, TextField, Tooltip, Typography } from '@mui/material'
 import {FlightOutlined,DomainOutlined,TrainOutlined,DriveEtaOutlined,DirectionsBusFilledOutlined ,
   DeckOutlined ,MonetizationOnOutlined,BusinessCenter, AccountCircle, KeyboardArrowDown} from '@mui/icons-material'
-import { useRouter , usePathname } from 'next/navigation'
+import { useRouter , usePathname } from 'next/navigation';
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  backgroundColor: 'white',
+  boxShadow: 24,
+  p: 4,
+  display:'flex',
+  justifyContent:'center',
+  padding:40
+};
+
 const Navbar = () => {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const router = useRouter();
   const pathname = usePathname();
-  console.log(pathname.substring(1));
+
+  const [username,setUsername] = useState("");
+  const [email,setEmail] = useState("");
+  const [password,setPassword] = useState("");
+  
   return (
     <div>
         <AppBar position='sticky' style={{backgroundColor:'white'}}>
@@ -58,7 +80,23 @@ const Navbar = () => {
                   </Box>
                 </Tooltip>
                 <Box>
-                  <Button startIcon={<AccountCircle/>} endIcon={<KeyboardArrowDown/>} variant="outlined">LOGIN / SIGNUP</Button>
+                  <Button onClick={handleOpen} startIcon={<AccountCircle/>} endIcon={<KeyboardArrowDown/>} variant="outlined">LOGIN / SIGNUP</Button>
+                  <Modal
+                    open={open}
+                    onClose={handleClose}
+                  >
+                    <Paper elevation={8} style={style}>
+                      
+                      <Stack direction="column" spacing={3}>
+                        <Typography variant='body1'>Sign Up</Typography>
+                        <TextField variant='outlined' label="Name" value={username} onChange={(e)=>setUsername(e.target.value)}/>
+                        <TextField variant='outlined' label="Email" value={email} onChange={(e)=>setEmail(e.target.value)} />
+                        <TextField type='password' variant='outlined' label="Password" value={password} onChange={(e)=>setPassword(e.target.value)} />
+                        <Button variant='contained' onClick={()=>{}}>Register</Button>
+                        
+                      </Stack>
+                    </Paper>
+                  </Modal>
                 </Box>  
               </Stack>
             </Grid>
